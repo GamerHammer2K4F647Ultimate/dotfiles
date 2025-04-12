@@ -26,12 +26,18 @@ def install():
     os.popen("cp .gitconfig ~")
 
 def help():
-    print("dotfile config: ");
+    print(f"usage {sys.argv[0]} [option]")
+    print("options: ");
     print("    xinitrc - xinitrc configurator")
     print("    install - dotfile installer")
     print("    help - this")
 
 def main():
+    argc = len(sys.argv)
+    if argc == 1: 
+        help()
+        exit()
+
     if sys.argv[1] == "xinitrc": xinitrc()
     elif sys.argv[1] == "install": install()
     elif sys.argv[1] == "help": help()
