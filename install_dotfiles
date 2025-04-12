@@ -1,6 +1,0 @@
-mv bashrc ../.bashrc
-doas mv rootbashrc /root/.bashrc
-mv aliasrc ../aliasrc
-mv ./xinitrc ../.xinitrc
-mv ./config.conf ../.config/neofetch/
-mv Xresources ../.Xresources

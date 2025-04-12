@@ -1,6 +1,6 @@
 #xrandr -s 1280x800
 #slstatus &
-feh --bg-fill ~/Pictures/bliss_cat.jpg
+feh --bg-fill ~/Pictures/background/FA-18.png
 xrdb ~/.Xresources &
 unclutter -idle 3 &
 
