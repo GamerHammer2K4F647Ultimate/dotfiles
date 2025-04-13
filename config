@@ -2,12 +2,21 @@
 
 import sys
 import os
+import requests
+
+RED = "\u001b[0;31m"
+GRN = "\u001b[0;32m"
+BLU = "\u001b[0;34m"
+YEL = "\u001b[0;33m"
+RESET = "\u001b[0m"
+
+BGPACK_URL = "https://github.com/GamerHammer2K4F647Ultimate/gamerhammer2k4f647ultimate.github.io/raw/refs/heads/master/ugrocica.zip"
 
 def xinitrc():
-    
     print("configures:")
     print(" - background and background mode")
     print(" - window manager")
+    print(" - status monitor")
     print(" - cursor idle time (time until cursor is hidden)\n")
     
     print("write $(bg_random [folder with pictures]) to use the bg randomizer")
@@ -15,14 +24,15 @@ def xinitrc():
     print("bg modes: --bg-fill, --bg-scale, --bg-tile, --bg-max, --bg-center")
     bg_mode = input("bg mode: ")
     wm = input("window manager: ")
+    status = input("status monitor: ")
     idle_time = input("cursor idle time: ")
 
-    reset = input("write? [y/n]:")
+    write = input("write? [y/n]: ")
     
-    if reset == 'y':
+    if write == 'y':
         f = open(".xinitrc", "w")
-        f.write("slstatus & \n")
-        f.write(f"feh {bg_mode} {bg}\n")
+        f.write(f"{status} & \n")
+        f.write(f"feh {bg_mode} \"{bg}\"\n")
         f.write(f"xrdb ~/.Xresources &\n")
         f.write(f"unclutter -idle {idle_time} &\n")
         f.write(f"\nexec {wm} > ~/.{wm}.log\n")
@@ -30,6 +40,28 @@ def xinitrc():
     else: 
         print("\nrestarting\n")
         xinitrc()
+    
+    xres = input("create .Xresources? [y/n]: ")
+    if xres == 'y': xresources()
+    else: return True
+
+def xresources():
+    print("not implemented")
+
+def status_code(code):
+    if code == 200: print(f"{GRN}200 OK{RESET}")
+    elif code == 404: print(f"{RED}404 Not Found{RESET}")
+    elif code == 403: print(f"{RED}403 Forbidden{RESET}")
+    elif code == 401: print(f"{RED}401 Unauthorized{RESET}")
+    elif code == 302: print(f"{YEL}302 Found{RESET}")
+    else: print(f"{RED}Uninterpreted response code{RESET}")
+
+def getbg():
+    x = requests.get(BGPACK_URL)
+    status_code(code=x.status_code)
+    f = open("ugrocicapack.zip", "wb")
+    f.write(x.content)
+    f.close()
 
 def install():
     os.popen("cp .xinitrc ~/.xinitrc")
@@ -44,6 +76,7 @@ def help():
     print("options: ");
     print("    xinitrc - xinitrc configurator")
     print("    install - dotfile installer (run with sudo)")
+    print("    getbg - download backgrounds")
     print("    help - this")
 
 def main():
@@ -54,6 +87,7 @@ def main():
 
     if sys.argv[1] == "xinitrc": xinitrc()
     elif sys.argv[1] == "install": install()
+    elif sys.argv[1] == "getbg": getbg()
     elif sys.argv[1] == "help": help()
     
 if __name__ == "__main__":

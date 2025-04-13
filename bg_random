@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# randomly selects an image from a folder
+
 import os
 import random
 import sys
@@ -10,10 +12,13 @@ GRN = "\u001b[0;32m"
 BLU = "\u001b[0;34m"
 RESET = "\u001b[0m"
 
+ERROR = f"{RED}error{RESET}:"
+NOTE = f"{BLU}note{RESET}:"
+
 def usage():
-    print(f"{RED}error{RESET}: no folder provided")
+    print(f"{ERROR} no folder provided")
     print(f"{GRN}usage{RESET}: {sys.argv[0]} [folder]")
-    print(f"{BLU}note{RESET}: folder should contain images ONLY")
+    print(f"{NOTE} folder should contain images ONLY")
     exit()
 
 def main():
@@ -25,7 +30,7 @@ def main():
     files = [f for f in os.listdir(folder) if os.path.isfile(os.path.join(folder, f))]
     fsize = len(files)
     index = random.randrange(1, fsize)
-    print(f"{files[index]}")
+    print(f"{os.path.join(folder, files[index])}")
 
 if __name__ == "__main__":
     main()
