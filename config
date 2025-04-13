@@ -4,19 +4,32 @@ import sys
 import os
 
 def xinitrc():
+    
+    print("configures:")
+    print(" - background and background mode")
+    print(" - window manager")
+    print(" - cursor idle time (time until cursor is hidden)\n")
+    
+    print("write $(bg_random [folder with pictures]) to use the bg randomizer")
     bg = input("background file: ")
     print("bg modes: --bg-fill, --bg-scale, --bg-tile, --bg-max, --bg-center")
     bg_mode = input("bg mode: ")
     wm = input("window manager: ")
     idle_time = input("cursor idle time: ")
 
-    f = open(".xinitrc", "w")
-    f.write("slstatus & \n")
-    f.write(f"feh {bg_mode} {bg}\n")
-    f.write(f"xrdb ~/.Xresources &\n")
-    f.write(f"unclutter -idle {idle_time} &\n")
-    f.write(f"\nexec {wm} > ~/.{wm}.log")
-    f.close()
+    reset = input("write? [y/n]:")
+    
+    if reset == 'y':
+        f = open(".xinitrc", "w")
+        f.write("slstatus & \n")
+        f.write(f"feh {bg_mode} {bg}\n")
+        f.write(f"xrdb ~/.Xresources &\n")
+        f.write(f"unclutter -idle {idle_time} &\n")
+        f.write(f"\nexec {wm} > ~/.{wm}.log\n")
+        f.close()
+    else: 
+        print("\nrestarting\n")
+        xinitrc()
 
 def install():
     os.popen("cp .xinitrc ~/.xinitrc")
