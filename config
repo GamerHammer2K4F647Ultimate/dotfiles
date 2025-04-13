@@ -24,12 +24,13 @@ def install():
     os.popen("cp .zshrc ~/.zshrc")
     os.popen("cp -r .config ~/.config")
     os.popen("cp .gitconfig ~")
+    os.popen("cp ./bg_random /usr/local/bin")
 
 def help():
     print(f"usage {sys.argv[0]} [option]")
     print("options: ");
     print("    xinitrc - xinitrc configurator")
-    print("    install - dotfile installer")
+    print("    install - dotfile installer (run with sudo)")
     print("    help - this")
 
 def main():
