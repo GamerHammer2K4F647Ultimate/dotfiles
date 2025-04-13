@@ -13,7 +13,7 @@ RESET = "\u001b[0m"
 def usage():
     print(f"{RED}error{RESET}: no folder provided")
     print(f"{GRN}usage{RESET}: {sys.argv[0]} [folder]")
-    print(f"{BLU}note{RESET}: folder should contain images")
+    print(f"{BLU}note{RESET}: folder should contain images ONLY")
     exit()
 
 def main():
