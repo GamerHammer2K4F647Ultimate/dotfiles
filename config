@@ -67,7 +67,7 @@ def install():
     os.popen("cp .xinitrc ~/.xinitrc")
     os.popen("cp .bashrc ~/.bashrc")
     os.popen("cp .zshrc ~/.zshrc")
-    os.popen("cp -r .config ~/.config")
+    os.popen("cp -r .config ~")
     os.popen("cp .gitconfig ~")
     os.popen("cp ./bg_random /usr/local/bin")
 
